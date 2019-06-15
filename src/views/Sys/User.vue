@@ -10,15 +10,15 @@
 				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:user:add" type="primary" @click="handleAdd" />
+				<bit-button label="新增" perms="sys:user:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
+	<bit-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
-	</kt-table>
+	</bit-table>
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
