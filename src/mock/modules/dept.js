@@ -4,28 +4,29 @@
 
 // 保存
 export function save() {
-    return {
-      url: 'dept/save',
-      type: 'post',
-      data: {
-        "code": 200,
-        "msg": null,
-        "data": 1
-      }
+  return {
+    url: 'dept/save',
+    type: 'post',
+    data: {
+      "code": 200,
+      "msg": null,
+      "data": 1
     }
   }
-  // 批量删除
-  export function batchDelete() {
-    return {
-      url: 'dept/delete',
-      type: 'post',
-      data: {
-        "code": 200,
-        "msg": null,
-        "data": 1
-      }
+}
+// 批量删除
+export function batchDelete() {
+  return {
+    url: 'dept/delete',
+    type: 'post',
+    data: {
+      "code": 200,
+      "msg": null,
+      "data": 1
     }
   }
+}
+export function findDeptTree() {
   // 查询机构树
   let findTreeData = {
     "code": 200,
@@ -52,11 +53,9 @@ export function save() {
     }
   }
   findTreeData.data.content = content
-  export function findDeptTree() {
-    return {
-      url: 'dept/findTree',
-      type: 'get',
-      data: findTreeData
-    }
+  return {
+    url: 'dept/findTree',
+    type: 'get',
+    data: findTreeData
   }
-  
+}

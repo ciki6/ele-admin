@@ -21,7 +21,6 @@ export default {
   position: absolute;
   top: 60px;
   left: 0px;
-  max-width: 95%;
   // background: rgba(202, 243, 227, 0.1);
   .breadcrumb {
     padding: 10px;
