@@ -6,16 +6,17 @@
     </span>
     <!-- 导航菜单 -->
     <span class="nav-bar">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" :style="{'background-color':themeColor}"
-          text-color="#fff" active-text-color="#ffd04b" mode="horizontal" @select="selectNavBar()">
-        <el-menu-item index="1" @click="$router.push('/')"><i class="fa fa-home fa-lg"></i> {{$t("common.home")}} </el-menu-item>
-        <el-menu-item index="2">{{$t("common.doc")}}</el-menu-item>
-        <el-menu-item index="3">{{$t("common.msgCenter")}}</el-menu-item>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" 
+          :background-color="themeColor" text-color="#fff" active-text-color="#ffd04b" mode="horizontal" @select="selectNavBar()">
+        <el-menu-item index="1" @click="$router.push('/')"><i class="fa fa-home fa-lg"></i>  </el-menu-item>
+        <el-menu-item index="2" @click="openWindow('https://gitee.com/liuge1988/kitty')">{{$t("common.projectRepo")}}</el-menu-item>
+        <el-menu-item index="3" @click="openWindow('https://gitee.com/liuge1988/kitty/wikis/Home')">{{$t("common.doc")}}</el-menu-item>
+        <el-menu-item index="4" @click="openWindow('https://www.cnblogs.com/xifengxiaoma/')">{{$t("common.blog")}}</el-menu-item>
       </el-menu>
     </span>
     <span class="tool-bar">
       <!-- 主题切换 -->
-      <theme-picker class="theme-picker" @onThemeChange="onThemeChange"></theme-picker>
+      <theme-picker class="theme-picker" :default="themeColor" @onThemeChange="onThemeChange"></theme-picker>
       <!-- 语言切换 -->
       <lang-selector class="lang-selector"></lang-selector>   
       <!-- 用户信息 -->
@@ -51,6 +52,9 @@ export default {
     }
   },
   methods: {
+    openWindow(url) {
+      window.open(url)
+    },
     selectNavBar(key, keyPath) {
       console.log(key, keyPath)
     },
@@ -59,8 +63,8 @@ export default {
       this.$store.commit('onCollapse')
     },
     // 切换主题
-    onThemeChange: function(themeColor, oldThemeColor) {
-      this.$store.dispatch('onThemeChange', {themeColor, oldThemeColor})
+    onThemeChange: function(themeColor) {
+      this.$store.commit('setThemeColor', themeColor)
     },
     // 退出登录
     logout: function() {
@@ -72,8 +76,7 @@ export default {
         this.$router.push("/login")
         this.$api.login.logout().then((res) => {
           }).catch(function(res) {
-            alert(res);
-          });
+          })
       })
       .catch(() => {})
     }
@@ -105,7 +108,7 @@ export default {
   .hamburger-container {
     width: 40px;
     float: left;
-    border-color: rgba(238, 241, 241, 0.747);
+    border-color: rgba(238, 241, 241, 0.4);
     border-left-width: 1px;
     border-left-style: solid;
     border-right-width: 1px;
