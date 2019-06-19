@@ -7,15 +7,15 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
+				<bit-button label="查询" perms="sys:role:view" type="primary" @click="findMenuTree(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<bit-button label="新增" perms="sys:dept:add" type="primary" @click="handleAdd" />
+				<bit-button label="新增" perms="sys:role:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<bit-table permsEdit="sys:dept:edit" permsDelete="sys:dept:delete"
+	<bit-table permsEdit="sys:role:edit" permsDelete="sys:role:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</bit-table>

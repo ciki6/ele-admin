@@ -61,9 +61,9 @@ import BitTable from "@/views/Core/BitTable"
 import BitButton from "@/views/Core/BitButton"
 export default {
 	components:{
-			PopupTreeInput,
-			BitTable,
-			BitButton
+		PopupTreeInput,
+		BitTable,
+		BitButton
 	},
 	data() {
 		return {

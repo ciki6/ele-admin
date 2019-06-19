@@ -6,7 +6,7 @@
 export function login() {
   const loginData = {
     "code": 200,
-    "msg": null,
+    "msg": 'success',
     "data": {
       "id": null,
       "userId": 1,

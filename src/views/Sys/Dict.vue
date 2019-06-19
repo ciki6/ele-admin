@@ -7,7 +7,7 @@
 				<el-input v-model="filters.label" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
+				<bit-button label="查询" perms="sys:dict:view" type="primary" @click="findMenuTree(null)"/>
 			</el-form-item>
 			<el-form-item>
 				<bit-button label="新增" perms="sys:dict:add" type="primary" @click="handleAdd" />
