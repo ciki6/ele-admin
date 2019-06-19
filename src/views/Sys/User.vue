@@ -22,7 +22,7 @@
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-			<el-form-item label="ID" prop="id">
+			<el-form-item label="ID" prop="id" v-if="false">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="用户名" prop="name">
@@ -121,15 +121,23 @@ export default {
 			this.pageRequest.columnFilters = {name: {name:'name', value:this.filters.name}}
 			this.$api.user.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
-			}).then(data.callback)
+				this.findUserRoles()
+			}).then(data!=null?data.callback:'')
+		},
+		// 加载用户角色信息
+		findUserRoles: function () {
+			this.$api.role.findAll().then((res) => {
+				// 加载角色集合
+				this.roles = res.data	
+			})
 		},
 		// 批量删除
 		handleDelete: function (data) {
-			this.$api.user.batchDelete(data.params).then(data.callback)
+			this.$api.user.batchDelete(data.params).then(data!=null?data.callback:'')
 		},
 		// 显示新增界面
 		handleAdd: function () {
-			this.editDialogVisible = true
+			this.dialogVisible = true
 			this.operation = true
 			this.dataForm = {
 				id: 0,
@@ -139,14 +147,20 @@ export default {
 				deptName: '',
 				email: 'test@qq.com',
 				mobile: '13889700023',
-				status: 1
+				status: 1,
+				userRoles: []
 			}
 		},
 		// 显示编辑界面
 		handleEdit: function (params) {
-			this.editDialogVisible = true
+			this.dialogVisible = true
 			this.operation = false
 			this.dataForm = Object.assign({}, params.row)
+			let userRoles = []
+			for(let i=0,len=params.row.userRoles.length; i<len; i++) {
+				userRoles.push(params.row.userRoles[i].roleId)
+			}
+			this.dataForm.userRoles = userRoles
 		},
 		// 编辑
 		submitForm: function () {
@@ -155,15 +169,24 @@ export default {
 					this.$confirm('确认提交吗？', '提示', {}).then(() => {
 						this.editLoading = true
 						let params = Object.assign({}, this.dataForm)
+						let userRoles = []
+						for(let i=0,len=params.userRoles.length; i<len; i++) {
+							let userRole = {
+								userId: params.id,
+								roleId: params.userRoles[i]
+							}
+							userRoles.push(userRole)
+						}
+						params.userRoles = userRoles
 						this.$api.user.save(params).then((res) => {
+							this.editLoading = false
 							if(res.code == 200) {
 								this.$message({ message: '操作成功', type: 'success' })
+								this.dialogVisible = false
+								this.$refs['dataForm'].resetFields()
 							} else {
 								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
 							}
-							this.editLoading = false
-							this.$refs['dataForm'].resetFields()
-							this.editDialogVisible = false
 							this.findPage(null)
 						})
 					})
@@ -180,6 +203,9 @@ export default {
       	deptTreeCurrentChangeHandle (data, node) {
         	this.dataForm.deptId = data.id
         	this.dataForm.deptName = data.name
+		},
+		// 菜单树选中
+      	handleOptionClick () {
       	}
 	},
 	mounted() {
