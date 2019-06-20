@@ -7,10 +7,10 @@
 				<el-input v-model="filters.name" placeholder="角色名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<bit-button label="查询" perms="sys:role:view" type="primary" @click="findPage(null)"/>
+				<bit-button :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<bit-button label="新增" perms="sys:role:add" type="primary" @click="handleAdd" />
+				<bit-button :label="$t('action.add')" perms="sys:role:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
@@ -33,8 +33,8 @@
 			</el-form-item>
 		</el-form>
 		<div slot="footer" class="dialog-footer">
-			<el-button :size="size" @click.native="dialogVisible = false">取消</el-button>
-			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">提交</el-button>
+			<el-button :size="size" @click.native="dialogVisible = false">{{$t('action.cancel')}}</el-button>
+			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
 		</div>
 	</el-dialog>
 	<!--角色菜单，表格树内容栏-->
@@ -44,16 +44,16 @@
 		</div>
 		<el-tree :data="menuData" size="mini" show-checkbox node-key="id" :props="defaultProps"
 			style="width: 100%;pading-top:20px;" ref="menuTree" :render-content="renderContent"
-			v-loading="menuLoading" element-loading-text="拼命加载中" :check-strictly="true"
+			v-loading="menuLoading" element-loading-text="$t('action.loading')" :check-strictly="true"
 			@check-change="handleMenuCheckChange">
 		</el-tree>
 		<div style="float:left;padding-left:24px;padding-top:12px;padding-bottom:4px;">
 			<el-checkbox v-model="checkAll" @change="handleCheckAll" :disabled="this.selectRole.id == null"><b>全选</b></el-checkbox>
 		</div>
 		<div style="float:right;padding-right:15px;padding-top:4px;padding-bottom:4px;">
-			<bit-button label="重置" perms="sys:role:edit" type="primary" @click="resetSelection" 
+			<bit-button :label="$t('action.reset')" perms="sys:role:edit" type="primary" @click="resetSelection" 
 				:disabled="this.selectRole.id == null"/>
-			<bit-button label="提交" perms="sys:role:edit" type="primary" @click="submitAuthForm" 
+			<bit-button :label="$t('action.submit')" perms="sys:role:edit" type="primary" @click="submitAuthForm" 
 				:disabled="this.selectRole.id == null" :loading="authLoading"/>
 		</div>
 	</div>
