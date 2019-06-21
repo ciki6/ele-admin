@@ -19,7 +19,7 @@ export function findNavTree() {
         "url": null,
         "perms": null,
         "type": 0,
-        "icon": "fa el-icon-setting",
+        "icon": "el-icon-setting",
         "orderNum": 0,
         "delFlag": 0,
         "parentName": null,

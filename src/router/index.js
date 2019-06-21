@@ -18,7 +18,12 @@ const router = new Router({
       name: '首页',
       component: Home,
       children: [
-        { path: '', component: Intro, name: '系统介绍' }
+        { path: '', 
+         name: '系统介绍',
+         component: Intro,
+        meta: {
+          icon: 'fa fa-home fa-lg'
+        } }
       ]
     },
     {
@@ -104,12 +109,8 @@ function addDynamicRoutes (menuList = [], routes = []) {
        component: null,
        name: menuList[i].name,
        meta: {
-         menuId: menuList[i].menuId,
-         title: menuList[i].name,
-         isDynamic: true,
-         isTab: true,
-         iframeUrl: ''
-       }
+        icon: menuList[i].icon
+      }
      }
      // url以http[s]://开头, 通过iframe展示
      if (isURL(menuList[i].url)) {

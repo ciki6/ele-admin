@@ -3,21 +3,20 @@
     <!-- 标签页 -->
     <div class="tab-container">
       <el-tabs class="tabs" :class="$store.state.app.collapse?'position-collapse-left':'position-left'"
-        v-model="mainTabsActiveName" :closable="true"
+        v-model="mainTabsActiveName" :closable="true" type="card"
         @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
-        <el-dropdown class="tabs-tools" :show-timeout="0" trigger="click">
-          <el-button class="tabs-tools">
-            关闭标签 <i class="el-icon-arrow-down"></i>
-          </el-button>
+        <el-dropdown class="tabs-tools" :show-timeout="0" trigger="hover">
+            <div style="font-size:20px;width:50px;"><i class="el-icon-arrow-down"></i></div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
-            <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
-            <el-dropdown-item @click.native="tabsCloseAllHandle">关闭全部标签页</el-dropdown-item>
-            <el-dropdown-item @click.native="tabsRefreshCurrentHandle">刷新当前标签页</el-dropdown-item>
+           <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsCloseAllHandle">关闭全部标签</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsRefreshCurrentHandle">刷新当前标签</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <el-tab-pane v-for="item in mainTabs"
           :key="item.name" :label="item.title" :name="item.name">
+          <span slot="label"><i :class="item.icon"></i> {{item.title}} </span>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -100,30 +99,45 @@ export default {
   padding: 0 5px 5px;
   position: absolute;
   top: 60px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  left: 1px;
+  right: 1px;
+  bottom: 0;
   // background: rgba(56, 5, 114, 0.5);
   .tabs {
     position: fixed;
     top: 60px;
-    right: 0px;
-    padding-left: 10px;
+    right: 50px;
+    padding-left: 0;
+    padding-right: 2px;
     z-index: 1020;
     height: 40px;
     line-height: 40px;
     font-size: 14px;
+    background: rgb(255, 253, 255);
+    border-color: rgba(200, 206, 206, 0.5);
+    border-left-width: 1px;
+    border-left-style: solid;
+    // border-bottom-width: 1px;
+    // border-bottom-style: solid;
   }
  .tabs-tools {
     position: fixed;
     top: 60px;
     right: 0;
     z-index: 1020;
-    height: 39px;
-    padding: 0 10px;
+    height: 40px;
+    // padding: 0 10px;
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
+    border-color: rgba(200, 206, 206, 0.5);
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  .tabs-tools:hover {
+    background: rgba(200, 206, 206, 0.5);
   }
   .main-content {
     position: absolute;
