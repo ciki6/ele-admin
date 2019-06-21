@@ -82,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.sysName = "I like Kitty"
+    this.sysName = "Bit Platform"
     var user = sessionStorage.getItem("user")
     if (user) {
       this.userName = user

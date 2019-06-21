@@ -16,12 +16,13 @@
 	</div>
 	<!--表格内容栏-->
 	<bit-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
-		:data="pageResult" :columns="columns" 
+		:data="pageResult" :columns="columns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</bit-table>
 	<!--新增编辑界面-->
-	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
-		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
+		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size"
+			label-position="right">
 			<el-form-item label="ID" prop="id" v-if="false">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
@@ -46,9 +47,18 @@
 			<el-form-item label="手机" prop="mobile">
 				<el-input v-model="dataForm.mobile" auto-complete="off"></el-input>
 			</el-form-item>
+			<el-form-item label="角色" prop="userRoles" v-if="!operation">
+				<el-select v-model="dataForm.userRoles" multiple placeholder="请选择"
+					 style="width: 100%;">
+					<el-option v-for="item in roles" :key="item.id"
+						:label="item.remark" :value="item.id">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			
 		</el-form>
 		<div slot="footer" class="dialog-footer">
-			<el-button :size="size" @click.native="editDialogVisible = false">{{$t('action.cancel')}}</el-button>
+			<el-button :size="size" @click.native="dialogVisible = false">{{$t('action.cancel')}}</el-button>
 			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
 		</div>
 	</el-dialog>
@@ -75,11 +85,12 @@ export default {
 				{prop:"id", label:"ID", minWidth:50},
 				{prop:"name", label:"用户名", minWidth:120},
 				{prop:"deptName", label:"机构", minWidth:120},
+				{prop:"roleNames", label:"角色", minWidth:100},
 				{prop:"email", label:"邮箱", minWidth:120},
 				{prop:"mobile", label:"手机", minWidth:100},
-				{prop:"status", label:"状态", minWidth:60},
-				{prop:"createBy", label:"创建人", minWidth:120},
-				{prop:"createTime", label:"创建时间", minWidth:190}
+				{prop:"status", label:"状态", minWidth:70},
+				// {prop:"createBy", label:"创建人", minWidth:120},
+				// {prop:"createTime", label:"创建时间", minWidth:190}
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
 				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120}
 			],
@@ -87,7 +98,7 @@ export default {
 			pageResult: {},
 
 			operation: false, // true:新增, false:编辑
-			editDialogVisible: false, // 新增编辑界面是否显示
+			dialogVisible: false, // 新增编辑界面是否显示
 			editLoading: false,
 			dataFormRules: {
 				name: [
@@ -103,13 +114,15 @@ export default {
 				deptName: '',
 				email: 'test@qq.com',
 				mobile: '13889700023',
-				status: 1
+				status: 1,
+				userRoles: []
 			},
 			deptData: [],
 			deptTreeProps: {
 				label: 'name',
 				children: 'children'
-			}
+			},
+			roles: []
 		}
 	},
 	methods: {
@@ -203,10 +216,7 @@ export default {
       	deptTreeCurrentChangeHandle (data, node) {
         	this.dataForm.deptId = data.id
         	this.dataForm.deptName = data.name
-		},
-		// 菜单树选中
-      	handleOptionClick () {
-      	}
+		}
 	},
 	mounted() {
 		this.findDeptTree()
