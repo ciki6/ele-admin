@@ -56,6 +56,7 @@
 import BitTable from "@/views/Core/BitTable"
 import BitButton from "@/views/Core/BitButton"
 export default {
+   name: 'Dict',
 	components:{
 			BitTable,
 			BitButton

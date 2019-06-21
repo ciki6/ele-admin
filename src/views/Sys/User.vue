@@ -70,6 +70,7 @@ import PopupTreeInput from "@/components/PopupTreeInput"
 import BitTable from "@/views/Core/BitTable"
 import BitButton from "@/views/Core/BitButton"
 export default {
+  name:"User",
 	components:{
 		PopupTreeInput,
 		BitTable,

@@ -65,6 +65,7 @@ import BitTable from "@/views/Core/BitTable"
 import BitButton from "@/views/Core/BitButton"
 import TableTreeColumn from '@/views/Core/TableTreeColumn'
 export default {
+  name:"Role",
 	components:{
 			BitTable,
 			BitButton,

@@ -123,6 +123,7 @@ import TableTreeColumn from '@/views/Core/TableTreeColumn'
 import PopupTreeInput from "@/components/PopupTreeInput"
 import FaIconTooltip from "@/components/FaIconTooltip"
 export default {
+  name:"Menu",
 	components:{
     PopupTreeInput,
     BitButton,
