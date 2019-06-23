@@ -95,8 +95,8 @@ export default {
   border-color: rgba(180, 190, 190, 0.2);
   border-width: 1px;
   border-style: solid;
-  background: rgba(180, 176, 176, 0.1);
-  margin: -12px;
+  background: rgba(182, 172, 172, 0.1);
+  margin: -14px;
 }
 .personal-desc {
   background: rgb(19, 138, 156);
@@ -115,6 +115,7 @@ export default {
 .personal-relation {
   font-size: 16px;
   padding: 12px;
+  margin-right: 1px;
   background: rgba(200, 209, 204, 0.3);
 }
 .relation-item {
@@ -125,7 +126,8 @@ export default {
   color: rgb(19, 138, 156);
 }
 .main-operation {
-  padding: 10px;
+  padding: 8px;
+  margin-right: 1px;
   /* background: rgba(175, 182, 179, 0.3); */
   border-color: rgba(201, 206, 206, 0.2);
   border-top-width: 1px;
@@ -137,6 +139,7 @@ export default {
 .other-operation {
   padding: 15px;
   text-align: left;
+   margin-right: 1px;
   border-color: rgba(180, 190, 190, 0.2);
   border-top-width: 1px;
   border-top-style: solid;
@@ -152,6 +155,7 @@ export default {
 .personal-footer {
   font-size: 14px;
   text-align: center;
+  margin-right: 1px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-color: rgba(180, 190, 190, 0.2);
