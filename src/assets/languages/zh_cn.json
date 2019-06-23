@@ -12,7 +12,7 @@
       "restore": "还原",
       "backupRestore": "备份还原",
       "versionName": "版本名称",             
-      "exit": "退出"
+      "exit": "退出登录"
   },
   "action": {
       "operation": "操作",

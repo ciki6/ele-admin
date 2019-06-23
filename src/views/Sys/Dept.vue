@@ -8,6 +8,7 @@
         </el-form-item>
         <el-form-item>
           <bit-button
+          icon="fa fa-search" 
             :label="$t('action.search')"
             perms="sys:dept:view"
             type="primary"
@@ -16,6 +17,7 @@
         </el-form-item>
         <el-form-item>
           <bit-button
+          icon="fa fa-plus" 
             :label="$t('action.add')"
             perms="sys:dept:add"
             type="primary"
@@ -59,17 +61,8 @@
         :label="$t('action.operation')"
       >
         <template slot-scope="scope">
-          <bit-button
-            :label="$t('action.edit')"
-            perms="sys:dept:edit"
-            @click="handleEdit(scope.row)"
-          />
-          <bit-button
-            :label="$t('action.delete')"
-            perms="sys:dept:delete"
-            type="danger"
-            @click="handleDelete(scope.row)"
-          />
+          <bit-button icon="fa fa-edit" :label="$t('action.edit')" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
+          <bit-button icon="fa fa-trash" :label="$t('action.delete')" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>

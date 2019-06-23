@@ -8,7 +8,10 @@
           <span class="sender">{{ user.name }} - {{ user.role }}</span>  
         </div>  
         <div class="registe-info">
-          <span class="registe-info">{{ user.registeInfo }}</span>
+          <span class="registe-info">
+            <li class="fa fa-clock-o"></li>
+            {{ user.registeInfo }}
+          </span>
         </div>  
     </div>
     <div class="personal-relation">
@@ -18,31 +21,30 @@
     </div>
     <div class="main-operation">
         <span class="main-operation-item">
-          <el-button size="small">个人中心</el-button>
+          <el-button size="small" icon="fa fa-male">个人中心</el-button>
         </span>    
         <span class="main-operation-item">
-          <el-button size="small">修改密码</el-button>
+          <el-button size="small" icon="fa fa-key">修改密码</el-button>
         </span>    
     </div>
     <div class="other-operation">
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-eraser"></li>
           清除缓存
         </div>    
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-user"></li>
           在线人数
         </div>    
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-bell"></li>
           访问次数
-        </div>    
-        <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
-          访问时间
-        </div>    
+        </div>  
     </div>
-    <div class="personal-footer" @click="logout">{{$t("common.logout")}}</div>
+    <div class="personal-footer" @click="logout">
+      <li class="fa fa-sign-out"></li>
+      {{$t("common.logout")}}
+    </div>
   </div>
 </template>
 
@@ -130,7 +132,7 @@ export default {
   border-top-style: solid;
 }
 .main-operation-item {
-  margin: 20px;
+  margin: 15px;
 }
 .other-operation {
   padding: 15px;

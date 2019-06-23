@@ -7,16 +7,37 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<bit-button :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
+				<bit-button icon="fa fa-search" :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<bit-button :label="$t('action.add')" perms="sys:user:add" type="primary" @click="handleAdd" />
+				<bit-button icon="fa fa-plus" :label="$t('action.add')" perms="sys:user:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
+	<div class="toolbar" style="float:right;padding-top:10px;padding-right:15px;">
+		<el-form :inline="true" :model="filters" :size="size">
+			<el-form-item>
+				<el-button-group>
+				<el-tooltip content="刷新" placement="top">
+					<el-button icon="fa fa-refresh" @click="findPage(null)"></el-button>
+				</el-tooltip>
+				<el-tooltip content="列显示" placement="top">
+					<el-button icon="fa fa-filter" @click="displayFilterColumnsDialog"></el-button>
+				</el-tooltip>
+				<el-tooltip content="导出" placement="top">
+					<el-button icon="fa fa-file-excel-o"></el-button>
+				</el-tooltip>
+				</el-button-group>
+			</el-form-item>
+		</el-form>
+		<!--表格显示列界面-->
+		<table-column-filter-dialog ref="tableColumnFilterDialog" :columns="columns" 
+			@handleFilterColumns="handleFilterColumns"> 
+		</table-column-filter-dialog>
+	</div>
 	<!--表格内容栏-->
 	<bit-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
-		:data="pageResult" :columns="columns"
+		:data="pageResult" :columns="filterColumns.length > 0 ? filterColumns : columns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</bit-table>
 	<!--新增编辑界面-->
@@ -69,13 +90,15 @@
 import PopupTreeInput from "@/components/PopupTreeInput"
 import BitTable from "@/views/Core/BitTable"
 import BitButton from "@/views/Core/BitButton"
+import TableColumnFilterDialog from "@/views/Core/TableColumnFilterDialog"
 import { format } from "@/utils/datetime"
 export default {
   name:"User",
 	components:{
 		PopupTreeInput,
 		BitTable,
-		BitButton
+		BitButton,
+		TableColumnFilterDialog
 	},
 	data() {
 		return {
@@ -96,6 +119,7 @@ export default {
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
 				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
 			],
+			filterColumns: [],
 			pageRequest: { pageNum: 1, pageSize: 10 },
 			pageResult: {},
 
@@ -222,7 +246,16 @@ export default {
 		// 时间格式化
       	dateFormat: function (row, column, cellValue, index){
           	return format(row[column.property])
-      	}
+      	},
+		// 处理表格列过滤显示
+      	displayFilterColumnsDialog: function (filterColumns) {
+			this.$refs.tableColumnFilterDialog.setDialogVisible(true)
+      	},
+		// 处理表格列过滤显示
+      	handleFilterColumns: function (data) {
+			this.filterColumns = data.filterColumns
+			this.$refs.tableColumnFilterDialog.setDialogVisible(false)
+		  }
 	},
 	mounted() {
 		this.findDeptTree()

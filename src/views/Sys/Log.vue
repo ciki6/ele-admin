@@ -7,7 +7,7 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<bit-button :label="$t('action.search')" perms="sys:log:view" type="primary" @click="findPage(null)"/>
+				<bit-button icon="fa fa-search" :label="$t('action.search')" perms="sys:log:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 		</el-form>
 	</div>
