@@ -10,7 +10,7 @@
         :fixed="column.fixed" :key="column.prop" :type="column.type" :formatter="column.formatter"
         :sortable="column.sortable==null?true:column.sortable">
       </el-table-column>
-       <el-table-column :label="$t('action.operation')"  width="180" fixed="right" v-if="showOperation">
+       <el-table-column :label="$t('action.operation')"  width="185" fixed="right" v-if="showOperation">
         <template slot-scope="scope">
           <bit-button icon="fa fa-edit" :label="$t('action.edit')" :perms="permsEdit" :size="size" @click="handleEdit(scope.$index, scope.row)" />
           <bit-button icon="fa fa-trash" :label="$t('action.delete')" :perms="permsDelete" :size="size" type="danger" @click="handleDelete(scope.$index, scope.row)" />

@@ -54,7 +54,7 @@ export function findDeptTree() {
       parent.children.push(obj)
     }
   }
-  findTreeData.data.content = content
+  findTreeData.data = content
   return {
     url: 'dept/findTree',
     type: 'get',

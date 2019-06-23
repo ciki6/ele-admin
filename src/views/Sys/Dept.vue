@@ -57,7 +57,7 @@
         fixed="right"
         header-align="center"
         align="center"
-        width="180"
+        width="185"
         :label="$t('action.operation')"
       >
         <template slot-scope="scope">
