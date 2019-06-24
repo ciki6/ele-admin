@@ -22,7 +22,8 @@ const router = new Router({
          name: '系统介绍',
          component: Intro,
         meta: {
-          icon: 'fa fa-home fa-lg'
+          icon: 'fa fa-home fa-lg',
+          index: 0
         } }
       ]
     },
@@ -74,7 +75,8 @@ function addDynamicMenuAndRoutes(userName) {
   .then(res => {
     // 添加动态路由
     let dynamicRoutes = addDynamicRoutes(res.data)
-    router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
+    // 处理静态组件绑定路由
+    handleStaticComponent(router, dynamicRoutes)
     router.addRoutes(router.options.routes);
     // 保存加载状态
     store.commit('menuRouteLoaded', true)
@@ -143,6 +145,19 @@ function addDynamicRoutes (menuList = [], routes = []) {
    console.log('动态路由加载完成.')
  }
  return routes
+}
+
+/**
+ * 处理路由到本地直接指定页面组件的情况
+ * 比如'代码生成'是要求直接绑定到'Generator'页面组件
+ */
+function handleStaticComponent(router, dynamicRoutes) {
+  for(let j=0;j<dynamicRoutes.length; j++) {
+    if(dynamicRoutes[j].name == '代码生成') {
+      break
+    }
+  }
+  router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
 }
 
 export default router
