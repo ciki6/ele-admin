@@ -12,7 +12,7 @@
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<bit-table
+	<bit-table :height="350" 
     :data="pageResult" :columns="columns" :showOperation="showOperation" @findPage="findPage">
 	</bit-table>
   </div>

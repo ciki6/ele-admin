@@ -15,7 +15,7 @@
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<bit-table permsEdit="sys:dict:edit" permsDelete="sys:dict:delete"
+	<bit-table :height="350" permsEdit="sys:dict:edit" permsDelete="sys:dict:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</bit-table>

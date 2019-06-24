@@ -36,7 +36,7 @@
 		</table-column-filter-dialog>
 	</div>
 	<!--表格内容栏-->
-	<bit-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
+	<bit-table :height="350" permsEdit="sys:user:edit" permsDelete="sys:user:delete"
 		:data="pageResult" :columns="filterColumns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</bit-table>

@@ -32,9 +32,7 @@
       stripe
       size="mini"
       style="width: 100%;"
-      v-loading="loading"
-      element-loading-text="$t('action.loading')"
-    >
+       rowKey="id" v-loading="loading" element-loading-text="$t('action.loading')">
       <el-table-column prop="id" header-align="center" align="center" width="80" label="ID"></el-table-column>
       <table-tree-column prop="name" header-align="center" treeKey="id" width="150" label="名称"></table-tree-column>
       <el-table-column

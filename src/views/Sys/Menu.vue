@@ -15,7 +15,7 @@
 		</el-form>
 	</div>
 	<!--表格树内容栏-->
-    <el-table :data="tableTreeData" stripe size="mini" style="width: 100%;" v-loading="loading" element-loading-text="$t('action.loading')">
+    <el-table :data="tableTreeData" stripe size="mini" style="width: 100%;" rowKey="id" v-loading="loading" element-loading-text="$t('action.loading')">>
       <el-table-column
         prop="id" header-align="center" align="center" width="80" label="ID">
       </el-table-column>
