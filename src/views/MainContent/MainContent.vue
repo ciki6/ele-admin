@@ -130,14 +130,14 @@ export default {
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
-    border-color: rgba(200, 206, 206, 0.5);
+    border-color: rgba(200, 206, 206, 1);
     border-left-width: 1px;
     border-left-style: solid;
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
   .tabs-tools:hover {
-    background: rgba(200, 206, 206, 0.5);
+    background: rgba(200, 206, 206, 1);
   }
   .main-content {
     position: absolute;

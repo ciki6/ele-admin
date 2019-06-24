@@ -67,6 +67,11 @@ export default {
         this.mainTabs = this.mainTabs.concat(tab)
       }
       this.mainTabsActiveName = tab.name
+       // 切换标签页时同步更新高亮菜单
+       if(this.$refs.navmenu != null) {
+        this.$refs.navmenu.activeIndex = '' + route.meta.index
+        this.$refs.navmenu.initOpenedMenu()
+      }
     }
   }
 }
