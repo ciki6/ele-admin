@@ -74,12 +74,20 @@ export default {
       })
       .then(() => {
         sessionStorage.removeItem("user")
+        this.deleteCookie("token")
         this.$router.push("/login")
         this.$api.login.logout().then((res) => {
           }).catch(function(res) {
         })
       })
       .catch(() => {})
+    },
+
+     // 删除cookie
+    deleteCookie: function(name) { 
+        var date=new Date(); 
+        date.setTime(date.getTime()-10000); 
+        document.cookie=name+"=v; expires="+date.toGMTString(); 
     }
   },
   mounted() {
