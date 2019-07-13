@@ -1,4 +1,5 @@
 <template>
+<div class="login">
   <el-form :model="loginForm" :rules="fieldRules" ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
     <span class="tool-bar">
       <!-- 主题切换 -->
@@ -19,6 +20,7 @@
        <el-button type="primary" style="width:48%;" @click.native.prevent="login" :loading="loading">登 录</el-button>
     </el-form-item>
   </el-form>
+</div>
 </template>
 
 <script>
@@ -91,6 +93,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.login {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/assets/login-bg.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
   .login-container {
     -webkit-border-radius: 5px;
     border-radius: 5px;
